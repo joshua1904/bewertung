@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{product.name}} {{product.price}}
+    <div class="container mt-4">
+        <div class="row g-4">
+            {% for voting in votings %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ voting.name }}</h5>
+                        <p class="card-text">Stars: {{ voting.stars |default:"No ratings yet" }}</p>
+                        <a href="{% url 'delete_voting' pk=voting.pk %}" type="button" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+<a href="{% url 'add_voting' pk=product.pk %}" type="button" class="btn btn-success">Add</a>
+{% endblock %}
